@@ -1,0 +1,10 @@
+
+==== exp3 ====
+损坏前 GetSource 通过，payload 摘要=29c90dd5228619d6
+损坏后 GetSource 拒绝: kind=internal code=source_integrity_error
+损坏 payload 仍可被 DecodeWAV 解码（19200 帧）：解码成功不等于字节可信
+错误顺序下缓存命中并交付旧输出 f41b4a9e83879a33，完全绕过损坏事实
+结论: 缓存查询必须排在 GetSource 完整性校验之后；缓存键必须包含已验证的
+      SHA-256 摘要而非源 ID；任何引用源校验失败即整单渲染失败，禁止负缓存、
+      禁止回退到旧成功产物。
+PASS  exp3
